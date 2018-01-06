@@ -3,8 +3,9 @@
   # and character vector "platform", which is the home site where they publish their takes
 # If no platform is provided, function will broaden its analysis to all of the user's tweets
   # option to set broaden to TRUE if platform is provided
+# Defaults to collecting up to 100 tweets from user and up to 10,000 replies
 
-ratio <- function(user, platform = NA, broaden = FALSE){
+ratio <- function(user, platform = NA, n_user = 100, n_at = 10000, broaden = FALSE){
   require(rtweet)
   require(tidyverse)
   
@@ -12,7 +13,7 @@ ratio <- function(user, platform = NA, broaden = FALSE){
   
   plength <- nchar(platform) # store character length of platform
   
-  from <- search_tweets(paste("from:",user,sep = ""), n = 500, retryonratelimit = TRUE) # collect tweets sent by user
+  from <- search_tweets(paste("from:",user,sep = ""), n = n_user, retryonratelimit = TRUE) # collect tweets sent by user
   
   if(broaden == FALSE){
     # if broaden is FALSE, filter tweets to only those that aren't quotes or RTs and do contain link to platform
@@ -24,7 +25,7 @@ ratio <- function(user, platform = NA, broaden = FALSE){
   }
   
   # collect tweets sent to the user
-  to <- search_tweets(paste("to:",user,sep = ""), n = 10000, retryonratelimit = TRUE)
+  to <- search_tweets(paste("to:",user,sep = ""), n = n_at, retryonratelimit = TRUE)
   
   # count how many tweets sent to the user, grouped by the tweet they're replying to
     # store grouped counts in new variable "ats"
