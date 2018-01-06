@@ -4,6 +4,7 @@
 # If no platform is provided, function will broaden its analysis to all of the user's tweets
   # option to set broaden to TRUE if platform is provided
 # Defaults to collecting up to 100 tweets from user and up to 10,000 replies
+  # can be expanded, which may be necessary for high-volume accounts, but could cause runtime lags 
 
 ratio <- function(user, platform = NA, n_user = 100, n_at = 10000, broaden = FALSE){
   require(rtweet)
