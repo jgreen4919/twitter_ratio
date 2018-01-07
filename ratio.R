@@ -7,10 +7,10 @@ library(tidyverse)
 library(ggplot2)
 
 cillizza <- ratio(user = "CillizzaCNN", platform = "cnn.com")
-cillizza1 <- ggplot(cillizza, aes(x = ats, y = favorite_count))
+cillizza1 <- ggplot(cillizza, aes(x = favorite_count, y = ats))
 cillizza1 + geom_point() + geom_abline(slope = 1, intercept = 0)+
-  xlab("Replies")+
-  ylab("Faves")+
+  xlab("Faves")+
+  ylab("Replies")+
   ggtitle("Chris Cillizza's Take Ratios Since 1/4/17")+
   theme_bw()
 mean(cillizza$ratio1)

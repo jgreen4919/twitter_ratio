@@ -18,8 +18,8 @@ ratio <- function(user, platform = NA, n_user = 100, n_at = 10000, broaden = FAL
   
   if(broaden == FALSE){
     # if broaden is FALSE, filter tweets to only those that aren't quotes or RTs and do contain link to platform
-    from <- from %>% filter(is_quote == FALSE & is_retweet == FALSE & 
-                              substr(urls_url, start = 1, stop = plength) == platform)
+    from <- from %>% filter(is_quote == FALSE & is_retweet == FALSE)
+    from <- from[grep(platform, from$urls_url),]
   }else{
     # if broaden is TRUE, only filter out RTs
     from <- from %>% filter(is_retweet == FALSE & is.na(reply_to_user_id))
