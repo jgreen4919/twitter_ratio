@@ -6,12 +6,12 @@ library(rtweet)
 library(tidyverse)
 library(ggplot2)
 
-cillizza <- ratio(user = "CillizzaCNN", platform = "cnn.com")
+cillizza <- ratio(user = "CillizzaCNN", platform = "cnn", n_user = 500, n_at = 10000)
 cillizza1 <- ggplot(cillizza, aes(x = favorite_count, y = ats))
 cillizza1 + geom_point() + geom_abline(slope = 1, intercept = 0)+
   xlab("Faves")+
   ylab("Replies")+
-  ggtitle("Chris Cillizza's Take Ratios Since 1/4/17")+
+  ggtitle("Chris Cillizza's Take Ratios Since 12/29/17")+
   theme_bw()
 mean(cillizza$ratio1)
 
@@ -47,3 +47,20 @@ tpc1 + geom_point() + geom_abline(slope = 1, intercept = 0)+
   ggtitle("Tim Carney's Take Ratios (Last 9 Days)")+
   theme_bw()
 
+stephens <- ratio(user = "BretStephensNYT", platform = "nytimes", n_user = 500, n_at = 10000)
+stephens1 <- ggplot(stephens, aes(x = favorite_count, y = ats))
+stephens1 + geom_point() + geom_abline(slope = 1, intercept = 0)+
+  xlab("Faves")+
+  ylab("Replies")+
+  ggtitle("Bret Stephens's Take Ratios Since 12/29/17")+
+  theme_bw()
+mean(stephens$ratio1)
+
+nyt <- ratio(user = "nytopinion", n_user = 100, n_at = 10000)
+nyt <- nyt[which(nyt$status_id == "948708245354569728"):nrow(nyt),]
+nyt1 <- ggplot(nyt, aes(x = favorite_count, y = ats))
+nyt1 + geom_point() + geom_abline(slope = 1, intercept = 0)+
+  xlab("Faves")+
+  ylab("Replies")+
+  ggtitle("NYT Opinion Ratios since 1/4/18")+
+  theme_bw()
